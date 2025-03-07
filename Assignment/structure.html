@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>audio player</title>
+</head>
+
+<style>
+    body{
+        
+        background: url(dj-music-player-f01c44.webp);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+   
+    }
+    div{
+        padding: 0;
+        margin: 0;
+        display: block;
+ 
+        
+    }
+    .player{
+        border: 2px solid black;
+    background-color: #7b99ab0a;
+    font-style: oblique;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+               
+        
+    }
+    .songname{
+        display: flex;
+        justify-content: center;
+        
+    }
+    h2{
+   
+        color: rgb(135, 130, 130);
+        width: 100%;
+        height: fit-content;
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+        background-color: rgb(65, 61, 56);
+        
+    
+    }
+    .ko{
+        display: flex;
+        justify-content: center;
+        
+    }
+    .ok{
+        display: flex;
+        justify-content: center;
+
+    }
+
+</style>
+
+<body >
+    
+    <div class="player" style="justify-content: center; align-items: center;">
+        <h2><div class="ko">Simple music player</div></h2>
+        <br>
+        <audio id="audio" src="loser.mp3.mp3"></audio>
+        <audio id="audio" src="wishlist.mp3.mp3.mp3"></audio>
+        <audio id="audio" src="brothers.mp3.mp3.mp3"></audio>
+        <br>
+        <h3 class="songname">LOSER</h3><br>
+        <div class="ok">
+        <button onclick="prev()" style="background-color: bisque;">previous</button>
+        <button onclick="togglePlayPause()"style="background-color: bisque;">play</button>
+        <button onclick="next()"style="background-color: bisque;">next</button></div><br>
+        <br>
+        <input type="range" id="volume" min="0" max="10" step="2.5" onchange="volume()">
+    </div>
+    
+
+<script>
+    const songs = ["loser.mp3", "wishlist.mp3", "brothers.mp3"];
+    const songNames = ["Song 1", "Song 2", "Song 3"];
+    let currentSongIndex = 0;
+
+    const audio = document.getElementById("audio");
+    const songName = document.querySelector(".songname");
+    const playPauseButton = document.querySelector("button:nth-child(3)");
+
+    function togglePlayPause() {
+        if (audio.paused) {
+            audio.play();
+            playPauseButton.textContent = "⏸ Pause";
+        } else {
+            audio.pause();
+            playPauseButton.textContent = "▶ Play";
+        }
+    }
+
+    function next() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        audio.src = songs[currentSongIndex];
+        songName.textContent = songNames[currentSongIndex];
+        audio.play();
+        playPauseButton.textContent = "⏸ Pause";
+    }
+
+    function prev() {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        audio.src = songs[currentSongIndex];
+        songName.textContent = songNames[currentSongIndex];
+        audio.play();
+        playPauseButton.textContent = "⏸ Pause";
+    }
+
+    function volume() {
+        let volumeSlider = document.getElementById("volume");
+        audio.volume = volumeSlider.value / 10;
+    }
+</script>
+
+
+
+</body>
+</html>
